@@ -159,6 +159,7 @@ class MakeCommand extends GeneratorCommand
                 'DummyGrid',
                 'DummyShow',
                 'DummyForm',
+                'DummyPath',
             ],
             [
                 $this->modelName,
@@ -167,6 +168,7 @@ class MakeCommand extends GeneratorCommand
                 $this->indentCodes($this->generator->generateGrid()),
                 $this->indentCodes($this->generator->generateShow()),
                 $this->indentCodes($this->generator->generateForm()),
+                $path = Str::plural(Str::kebab(class_basename($this->modelName))),
             ],
             $stub
         );
