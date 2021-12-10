@@ -196,9 +196,10 @@ class Actions extends AbstractDisplayer
      */
     protected function renderView()
     {
+        $name = __('admin.view');
         return <<<EOT
-<a href="{$this->getResource()}/{$this->getRouteKey()}" class="{$this->grid->getGridRowName()}-view">
-    <i class="fa fa-eye"></i>
+<a href="{$this->getResource()}/{$this->getRouteKey()}" class="{$this->grid->getGridRowName()}-view btn btn-sm btn-default">
+    <i class="fa fa-eye"></i> {$name}
 </a>
 EOT;
     }
@@ -210,9 +211,10 @@ EOT;
      */
     protected function renderEdit()
     {
+        $name = __('admin.edit');
         return <<<EOT
-<a href="{$this->getResource()}/{$this->getRouteKey()}/edit" class="{$this->grid->getGridRowName()}-edit">
-    <i class="fa fa-edit"></i>
+<a href="{$this->getResource()}/{$this->getRouteKey()}/edit" class="{$this->grid->getGridRowName()}-edit btn btn-sm btn-default">
+    <i class="fa fa-edit"></i> {$name}
 </a>
 EOT;
     }
@@ -225,10 +227,10 @@ EOT;
     protected function renderDelete()
     {
         $this->setupDeleteScript();
-
+        $name = __('admin.delete');
         return <<<EOT
-<a href="javascript:void(0);" data-id="{$this->getKey()}" class="{$this->grid->getGridRowName()}-delete">
-    <i class="fa fa-trash"></i>
+<a href="javascript:void(0);" data-id="{$this->getKey()}" class="{$this->grid->getGridRowName()}-delete btn btn-sm btn-danger">
+    <i class="fa fa-trash"></i> {$name}
 </a>
 EOT;
     }
