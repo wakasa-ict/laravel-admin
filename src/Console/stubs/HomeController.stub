@@ -12,23 +12,24 @@ class HomeController extends Controller
 {
     public function index(Content $content)
     {
+        $user = \Encore\Admin\Facades\Admin::user();
         return $content
-            ->title('Dashboard')
-            ->description('Description...')
-            ->row(Dashboard::title())
-            ->row(function (Row $row) {
-
-                $row->column(4, function (Column $column) {
-                    $column->append(Dashboard::environment());
-                });
-
-                $row->column(4, function (Column $column) {
-                    $column->append(Dashboard::extensions());
-                });
-
-                $row->column(4, function (Column $column) {
-                    $column->append(Dashboard::dependencies());
-                });
-            });
+            ->title('HOME')
+            ->description('管理画面トップページ')
+            ->row(function (Row $row) use ($user) {
+            // Menuで設定した項目(フォルダ以外)
+            foreach (\Encore\Admin\Facades\Admin::menu() as $item) {
+                if($user->visible(\Illuminate\Support\Arr::get($item, 'roles', [])) && $user->can(\Illuminate\Support\Arr::get($item, 'permission'))){
+                    if (!isset($item['children']) && $item['uri'] != '/') {
+                        $row->column(4, function (Column $column) use ($item) {
+                            $itemUri = url()->isValidUrl($item['uri']) ? $item['uri'] : admin_url($item['uri']);
+                            $column->append('
+                                <a type="button" class="btn btn-primary btn-lg btn-block" href="'.$itemUri.'" style="margin-bottom: 5px"><i class="fa '.$item['icon'].' " aria-hidden="true"></i> '. admin_trans($item['title']) .'</a>
+                            ');
+                        });
+                    }
+                }
+            }
+        });
     }
 }
