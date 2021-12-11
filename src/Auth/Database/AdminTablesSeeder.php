@@ -16,20 +16,36 @@ class AdminTablesSeeder extends Seeder
         // create a user.
         Administrator::truncate();
         Administrator::create([
-            'username' => 'admin',
-            'password' => bcrypt('admin'),
-            'name'     => 'Administrator',
+            'username' => 'systemadmin',
+            'password' => bcrypt('systemadmin'),
+            'name'     => 'システム管理者',
         ]);
 
         // create a role.
         Role::truncate();
+        Role::create([
+            'name' => 'Systemadmin',
+            'slug' => 'systemadmin',
+        ]);
+
+        // add role to user.
+        Administrator::where('username', 'systemadmin')->first()->roles()->save(Role::where('slug', 'systemadmin')->first());
+
+        // create a user.
+        Administrator::create([
+            'username' => 'admin',
+            'password' => bcrypt('admin'),
+            'name'     => '特権管理者',
+        ]);
+
+        // create a role.
         Role::create([
             'name' => 'Administrator',
             'slug' => 'administrator',
         ]);
 
         // add role to user.
-        Administrator::first()->roles()->save(Role::first());
+        Administrator::where('username', 'admin')->first()->roles()->save(Role::where('slug', 'administrator')->first());
 
         // create a webadmin user.
         Administrator::create([
@@ -45,7 +61,7 @@ class AdminTablesSeeder extends Seeder
         ]);
 
         // add role to user.
-        Administrator::find(2)->roles()->save(Role::where('slug','webadmin')->first());
+        Administrator::where('username', 'webadmin')->first()->roles()->save(Role::where('slug','webadmin')->first());
 
         //create a permission
         Permission::truncate();
@@ -81,8 +97,14 @@ class AdminTablesSeeder extends Seeder
                 'http_path'   => "/auth/roles\r\n/auth/permissions\r\n/auth/menu\r\n/auth/logs",
             ],
             [
-                'name'        => 'Webadmin',
-                'slug'        => 'webadmin',
+                'name'        => 'Administrator',
+                'slug'        => 'administrator',
+                'http_method' => '',
+                'http_path'   => "/logs",
+            ],
+            [
+                'name'        => 'Contents',
+                'slug'        => 'contents',
                 'http_method' => '',
                 'http_path'   => "",
             ],
@@ -94,10 +116,20 @@ class AdminTablesSeeder extends Seeder
             ],
         ]);
 
+        // systemadmin
         Role::first()->permissions()->save(Permission::first());
+
+        // administrator
+        Role::where('slug','administrator')->first()->permissions()->save(Permission::where('slug','dashboard')->first());
+        Role::where('slug','administrator')->first()->permissions()->save(Permission::where('slug','auth.login')->first());
+        Role::where('slug','administrator')->first()->permissions()->save(Permission::where('slug','administrator')->first());
+        Role::where('slug','administrator')->first()->permissions()->save(Permission::where('slug','contents')->first());
+        Role::where('slug','administrator')->first()->permissions()->save(Permission::where('slug','sortable')->first());
+
+        // webadmin
         Role::where('slug','webadmin')->first()->permissions()->save(Permission::where('slug','dashboard')->first());
         Role::where('slug','webadmin')->first()->permissions()->save(Permission::where('slug','auth.login')->first());
-        Role::where('slug','webadmin')->first()->permissions()->save(Permission::where('slug','webadmin')->first());
+        Role::where('slug','webadmin')->first()->permissions()->save(Permission::where('slug','contents')->first());
         Role::where('slug','webadmin')->first()->permissions()->save(Permission::where('slug','sortable')->first());
 
         // add default menus.
