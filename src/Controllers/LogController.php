@@ -26,14 +26,14 @@ class LogController extends AdminController
         $grid->model()->orderBy('id', 'DESC');
 
         $grid->column('id', 'ID')->sortable();
-        $grid->column('user.name', 'User');
-        $grid->column('method')->display(function ($method) {
+        $grid->column('user.name', '管理者');
+        $grid->column('method', 'メソッド')->display(function ($method) {
             $color = Arr::get(OperationLog::$methodColors, $method, 'grey');
 
             return "<span class=\"badge bg-$color\">$method</span>";
         });
         $grid->column('path')->label('info');
-        $grid->column('ip')->label('primary');
+        $grid->column('ip', 'IP')->label('primary');
         $grid->column('input')->display(function ($input) {
             $input = json_decode($input, true);
             $input = Arr::except($input, ['_pjax', '_token', '_method', '_previous_']);
@@ -44,11 +44,12 @@ class LogController extends AdminController
             return '<pre>'.json_encode($input, JSON_PRETTY_PRINT | JSON_HEX_TAG).'</pre>';
         });
 
-        $grid->column('created_at', trans('admin.created_at'));
+        $grid->column('created_at', '日時'));
 
         $grid->actions(function (Grid\Displayers\Actions $actions) {
             $actions->disableEdit();
             $actions->disableView();
+            $actions->disableDelete();
         });
 
         $grid->disableCreateButton();
@@ -56,10 +57,10 @@ class LogController extends AdminController
         $grid->filter(function (Grid\Filter $filter) {
             $userModel = config('admin.database.users_model');
 
-            $filter->equal('user_id', 'User')->select($userModel::all()->pluck('name', 'id'));
-            $filter->equal('method')->select(array_combine(OperationLog::$methods, OperationLog::$methods));
+            $filter->equal('user_id', '管理者')->select($userModel::all()->pluck('name', 'id'));
+            $filter->equal('method', 'メソッド')->select(array_combine(OperationLog::$methods, OperationLog::$methods));
             $filter->like('path');
-            $filter->equal('ip');
+            $filter->equal('ip', 'IP');
         });
 
         return $grid;
