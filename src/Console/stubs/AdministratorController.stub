@@ -16,7 +16,7 @@ class AdministratorController extends AdminController
      *
      * @var string
      */
-    protected $title = 'Administrator';
+    protected $title = '管理者';
     protected $webRoleId = 2;
 
     /**
