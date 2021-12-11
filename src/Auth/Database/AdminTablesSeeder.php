@@ -206,6 +206,5 @@ class AdminTablesSeeder extends Seeder
         Menu::where('uri', 'logs')->first()->roles()->save(Role::where('slug', 'systemadmin')->first());
         Menu::where('uri', 'logs')->first()->roles()->save(Role::where('slug', 'administrator')->first());
         Menu::where('title', 'admin')->first()->roles()->save(Role::where('slug', 'systemadmin')->first());
-        Menu::where('title', 'admin')->first()->roles()->save(Role::where('slug', 'administrator')->first());
     }
 }
