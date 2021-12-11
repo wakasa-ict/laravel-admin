@@ -41,6 +41,38 @@
     Inspired by <a href="https://github.com/sleeping-owl/admin" target="_blank">SleepingOwlAdmin</a> and <a href="https://github.com/zofe/rapyd-laravel" target="_blank">rapyd-laravel</a>.
 </p>
 
+追加のコマンド
+------------
+```
+admin:random-password {usernames?}
+```
+
+追加の機能
+------------
+* 管理者アカウントの管理画面
+* ログの確認画面
+
+調整済み項目
+------------
+* Controller生成時に汎用ボタン設定を自動追記
+* HOME画面を目次に変更済み
+* 操作ドロップダウンを操作ボタンに変更済み
+* 不要なHTML要素を削除済み
+* 管理画面のタイトル関連を汎用的な文言に変更済み
+* アップロードのStrageディスク設定を変更済み
+* サイドメニューの検索機能を無効化済み
+* デフォルトの管理者と権限を追加済み
+    * 管理者
+        * systemadmin: システム管理者
+            * 全ての権限
+        * admin: 特権管理者
+            * Home画面とログイン権限、コンテンツ管理、ソート権限、Administratorパーミション(ログ閲覧, ユーザー管理)の権限
+        * webadmin: CMS管理ユーザー
+            * Home画面とログイン権限、ソート権限、コンテンツ管理の権限
+    * Permission
+        * Sortable: 追加Extention [grid-sortable](https://github.com/laravel-admin-extensions/grid-sortable)のソート操作権限
+        * Contents: /topics, /topics/* などコンテンツ管理権限追加用。コンテンツが増えるごとに編集する
+
 Sponsor
 ------------
 [laravel-admin] is being sponsored by the following tool; please help to support us by taking a look and signing up to a free trial

@@ -100,12 +100,12 @@ class AdminTablesSeeder extends Seeder
                 'name'        => 'Administrator',
                 'slug'        => 'administrator',
                 'http_method' => '',
-                'http_path'   => "/logs",
+                'http_path'   => "/logs\r\n/administrators\r\nadministrators/*",
             ],
             [
                 'name'        => 'Contents',
                 'slug'        => 'contents',
-                'http_method' => '',
+                'http_method' => '/examples\r\n\/examples/*',
                 'http_path'   => "",
             ],
             [
@@ -147,7 +147,7 @@ class AdminTablesSeeder extends Seeder
                 'order'     => 2,
                 'title'     => '管理者',
                 'icon'      => 'fa-user',
-                'uri'       => '/administrators',
+                'uri'       => 'administrators',
             ],
             [
                 'parent_id' => 0,
@@ -201,6 +201,11 @@ class AdminTablesSeeder extends Seeder
         ]);
 
         // add role to menu.
-        Menu::find(2)->roles()->save(Role::first());
+        Menu::where('uri', 'administrators')->first()->roles()->save(Role::where('slug', 'systemadmin')->first());
+        Menu::where('uri', 'administrators')->first()->roles()->save(Role::where('slug', 'administrator')->first());
+        Menu::where('uri', 'logs')->first()->roles()->save(Role::where('slug', 'systemadmin')->first());
+        Menu::where('uri', 'logs')->first()->roles()->save(Role::where('slug', 'administrator')->first());
+        Menu::where('title', 'admin')->first()->roles()->save(Role::where('slug', 'systemadmin')->first());
+        Menu::where('title', 'admin')->first()->roles()->save(Role::where('slug', 'administrator')->first());
     }
 }
