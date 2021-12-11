@@ -56,19 +56,12 @@ class RandomPasswordCommand extends Command
 
     public function createPassword(){
 
-        $pwd = str_shuffle('ABCDEFGHJKLMNPQRSTUVWXYZabcdefghijkmnpqrstuvwxyz0123456789!$%&()*+[]{}');
-    
-        $str = substr(str_shuffle($pwd), 0, 8);// 先頭８桁をランダムパスワードとして使う
-    
-        // 大文字小文字の英字と数字が混在するかどうかをチェック
-        // 混在すれば、パスワードを返し
-        if( preg_match('/^(?=.*[A-Z])(?=.*[a-z])(?=.*[0-9])(?=.*[!$%&()*+[]{}]).*$/',$str) ){ // コーディング量が少ない反面、読みづらい、理解しにくい正規表現
-            return $str;
-        }
-        // 混在しなければ、もう一度再帰関数を呼び出し
-        else{
-            return $this->createPassword();
-        }
+        $collectionA = array_rand(array_flip(range('a', 'z')), 3);
+        $collectionB = array_rand(array_flip(range('A', 'Z')), 2);
+        $collectionC = array_rand(array_flip(range(1, 9)), 2);
+        $collectionD = [array_rand(array_flip(['!','$','%','&','(',')','*','+','/']), 1)];
+        $passwordstr = array_merge($collectionA,$collectionB,$collectionC,$collectionD);
+        return str_shuffle(implode($passwordstr));
     
     }
     
