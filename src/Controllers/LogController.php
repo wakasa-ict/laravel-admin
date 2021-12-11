@@ -44,7 +44,7 @@ class LogController extends AdminController
             return '<pre>'.json_encode($input, JSON_PRETTY_PRINT | JSON_HEX_TAG).'</pre>';
         });
 
-        $grid->column('created_at', '日時'));
+        $grid->column('created_at', '日時');
 
         $grid->actions(function (Grid\Displayers\Actions $actions) {
             $actions->disableEdit();
