@@ -6,6 +6,7 @@ use Encore\Admin\Auth\Database\Administrator;
 use Encore\Admin\Controllers\AdminController;
 use Encore\Admin\Form;
 use Encore\Admin\Grid;
+use Encore\Admin\Facades\Admin;
 use Illuminate\Support\Facades\Hash;
 use Illuminate\Support\Facades\DB;
 
@@ -26,9 +27,11 @@ class AdministratorController extends AdminController
      */
     protected function grid()
     {
-        $user = \Encore\Admin\Facades\Admin::user();
+        $user = Admin::user();
 
         $grid = new Grid(new Administrator());
+
+        // Hide systemadmin
         $grid->model()->where('username', '<>', 'systemadmin');
 
         // ボタン
@@ -37,7 +40,7 @@ class AdministratorController extends AdminController
         $grid->disableColumnSelector(); // 列セレクタ無効
         $grid->actions(function ($actions) use ($user) {
             $actions->disableView(); // 詳細表示無効
-            if ($user->id == $actions->getKey()) {
+            if (Administrator::find($actions->getKey())->inRoles(['systemadmin', 'administrator'])) {
                 $actions->disableDelete(); // 削除無効
             }
         });
