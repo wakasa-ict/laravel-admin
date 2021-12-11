@@ -105,8 +105,8 @@ class AdminTablesSeeder extends Seeder
             [
                 'name'        => 'Contents',
                 'slug'        => 'contents',
-                'http_method' => '/examples\r\n\/examples/*',
-                'http_path'   => "",
+                'http_method' => '',
+                'http_path'   => "/examples\r\n\/examples/*",
             ],
             [
                 'name'        => 'Sortable',
