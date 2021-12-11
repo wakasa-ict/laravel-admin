@@ -30,7 +30,14 @@ class RandomPasswordCommand extends Command
 
         if (empty($usernamesStr)) {
             askForUserName:
-            $usernames[] = $this->ask('Please enter a username who needs to randomize his password');
+            $username = $this->ask('Please enter a username who needs to randomize his password');
+            $username = trim($username);
+            $user = $userModel::query()->where('username', $username)->first();
+            if (is_null($user)) {
+                $this->error('The user you entered is not exists');
+                goto askForUserName;
+            }
+            $usernames = array($username);
         }else{
             $usernames = explode(',', $usernamesStr);
 
@@ -39,18 +46,18 @@ class RandomPasswordCommand extends Command
         foreach ($usernames as $username) {
             $username = trim($username);
             $user = $userModel::query()->where('username', $username)->first();
-    
+
             if (is_null($user)) {
-                $this->error('The user you entered is not exists');
-                goto askForUserName;
+                $this->error("The user: {$username} is not exists");
+            }else{
+                $password = $this->createPassword();
+
+                $user->password = bcrypt($password);
+                $user->save();
+
+                $this->info("ID: {$user->username}\nPASSWORD: {$password}");
             }
-    
-            $password = $this->createPassword();
-    
-            $user->password = bcrypt($password);
-            $user->save();
-    
-            $this->info("ID: {$user->username}\nPASSWORD: {$password}");
+
         }
     }
 
@@ -62,7 +69,6 @@ class RandomPasswordCommand extends Command
         $collectionD = [array_rand(array_flip(['!','$','%','&','(',')','*','+','/']), 1)];
         $passwordstr = array_merge($collectionA,$collectionB,$collectionC,$collectionD);
         return str_shuffle(implode($passwordstr));
-    
     }
-    
+
 }
