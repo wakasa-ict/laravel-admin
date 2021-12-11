@@ -29,7 +29,7 @@ class AdministratorController extends AdminController
         $user = \Encore\Admin\Facades\Admin::user();
 
         $grid = new Grid(new Administrator());
-        $grid->model()->whereNot('username', 'systemadmin');
+        $grid->model()->where('username', '<>', 'systemadmin');
 
         // ボタン
         $grid->disableExport(); // ダウンロード無効
