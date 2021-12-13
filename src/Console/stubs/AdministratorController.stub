@@ -32,7 +32,7 @@ class AdministratorController extends AdminController
         $grid = new Grid(new Administrator());
 
         // Hide systemadmin
-        $grid->model()->where('username', '<>', 'systemadmin');
+        $grid->model()->where('username', '<>', 'admin');
 
         // ボタン
         $grid->disableExport(); // ダウンロード無効
@@ -40,7 +40,7 @@ class AdministratorController extends AdminController
         $grid->disableColumnSelector(); // 列セレクタ無効
         $grid->actions(function ($actions) use ($user) {
             $actions->disableView(); // 詳細表示無効
-            if (Administrator::find($actions->getKey())->inRoles(['systemadmin', 'administrator'])) {
+            if (Administrator::find($actions->getKey())->inRoles(['admin', 'manage'])) {
                 $actions->disableDelete(); // 削除無効
             }
         });
