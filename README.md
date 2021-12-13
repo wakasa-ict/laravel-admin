@@ -43,8 +43,9 @@
 
 追加のコマンド
 ------------
+ユーザー名をカンマ区切りで指定することで、英字大文字、英字小文字、数字、記号、の全てを含むランダムなパスワードを付与する
 ```
-admin:random-password {usernames?}
+php artisan admin:random-password admin,manage,webadmin
 ```
 
 追加の機能
@@ -63,12 +64,12 @@ admin:random-password {usernames?}
 * サイドメニューの検索機能を無効化済み
 * デフォルトの管理者と権限を追加済み
     * 管理者
-        * systemadmin: システム管理者
+        * admin: システム管理者
             * 全ての権限
-        * admin: 特権管理者
-            * Home画面とログイン権限、コンテンツ管理、ソート権限、Administratorパーミション(ログ閲覧, ユーザー管理)の権限
+        * manage: 特権管理者
+            * Home画面とログイン権限、コンテンツ管理、ソート権限、Manageパーミション(ログ閲覧, ユーザー管理)の権限
         * webadmin: CMS管理ユーザー
-            * Home画面とログイン権限、ソート権限、コンテンツ管理の権限
+            * Home画面とログイン権限、コンテンツ管理、ソート権限の権限
     * Permission
         * Sortable: 追加Extention [grid-sortable](https://github.com/laravel-admin-extensions/grid-sortable)のソート操作権限
         * Contents: /topics, /topics/* などコンテンツ管理権限追加用。コンテンツが増えるごとに編集する
