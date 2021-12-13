@@ -1,3 +1,7 @@
+td.column-__sortable__{
+    width: 26px;
+}
+
 input.content {
     min-height: 0 !important;
     padding: 6px 12px !important;
