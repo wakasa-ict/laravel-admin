@@ -12,7 +12,7 @@
         }
     ],
     "replace": {
-        "encore/laravel-admin": "1.8.16",
+        "encore/laravel-admin": "1.8.16"
     },
     "require": {
         "php": ">=7.0.0",
