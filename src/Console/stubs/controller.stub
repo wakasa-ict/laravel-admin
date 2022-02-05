@@ -68,6 +68,9 @@ DummyShow
     {
         $form = new Form(new DummyModel());
 
+        $id = request(strtolower('DummyModel'));
+        $model = DummyModel::find($id);
+
         $form->tools(function (Form\Tools $tools){
             // $tools->disableList(); // リストに戻る無効
             $tools->disableView(); // 詳細表示無効
