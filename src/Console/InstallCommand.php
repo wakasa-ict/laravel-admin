@@ -79,6 +79,7 @@ class InstallCommand extends Command
         $this->createAdministratorController();
         $this->createAuthController();
         $this->createExampleController();
+        $this->createFileuploadController();
 
         $this->createBootstrapFile();
         $this->createRoutesFile();
@@ -150,6 +151,23 @@ class InstallCommand extends Command
             str_replace('DummyNamespace', config('admin.route.namespace'), $contents)
         );
         $this->line('<info>ExampleController file was created:</info> '.str_replace(base_path(), '', $exampleController));
+    }
+
+    /**
+     * Create FileuploadController.
+     *
+     * @return void
+     */
+    public function createFileuploadController()
+    {
+        $fileuploadController = $this->directory.'/Controllers/FileuploadController.php';
+        $contents = $this->getStub('FileuploadController');
+
+        $this->laravel['files']->put(
+            $fileuploadController,
+            str_replace('DummyNamespace', config('admin.route.namespace'), $contents)
+        );
+        $this->line('<info>FileuploadController file was created:</info> '.str_replace(base_path(), '', $fileuploadController));
     }
 
     /**
