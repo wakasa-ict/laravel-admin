@@ -24,9 +24,12 @@ class LogController extends AdminController
         $grid = new Grid(new OperationLog());
 
         $grid->model()->orderBy('id', 'DESC');
-        $log = new OperationLog();
-        $originalColumns = collect($log->getConnection()->getSchemaBuilder()->getColumnListing($log->getTable()));
-        $export->originalValue($originalColumns->toArray());
+
+        $grid->export(function ($export) {
+            $log = new OperationLog();
+            $originalColumns = collect($log->getConnection()->getSchemaBuilder()->getColumnListing($log->getTable()));
+            $export->originalValue($originalColumns->toArray());
+        });
 
         $grid->column('id', 'ID')->sortable();
         $grid->column('user.name', '管理者');
