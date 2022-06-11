@@ -59,6 +59,11 @@ class MultipleFile extends Field
      */
     public function getValidator(array $input)
     {
+        //
+        if (request()->has(static::FILE_SORT_FLAG)) {
+            return false;
+        }
+
         if (request()->has(static::FILE_DELETE_FLAG)) {
             return false;
         }
@@ -367,7 +372,7 @@ EOT;
         $path = Arr::get($files, $key);
 
         if (!$this->retainable && $this->storage->exists($path)) {
-            /* If this field class is using ImageField trait i.e MultipleImage field, 
+            /* If this field class is using ImageField trait i.e MultipleImage field,
             we loop through the thumbnails to delete them as well. */
 
             if (isset($this->thumbnails) && method_exists($this, 'destroyThumbnailFile')) {
