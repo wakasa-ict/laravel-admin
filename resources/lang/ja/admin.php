@@ -98,5 +98,6 @@ return [
         'filter_clear'       => '全て表示',
         'filter_placeholder' => 'フィルタ',
     ],
+    'grid_items_selected'    => '{n}件 選択中',
     'menu_titles'           => [],
 ];
