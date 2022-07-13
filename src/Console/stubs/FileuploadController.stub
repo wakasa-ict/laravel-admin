@@ -19,7 +19,7 @@ class FileUploadController extends Controller
         // $image->storeAs(storage_path(), $newname, 'public');
         // $url = public_path().$newname;
         $image->storeAs('/admin/image/', $newname, 'public');
-        $url = "/storage/admin/image/" .$newname;
+        $url = asset("/storage/admin/image/" .$newname);
 
         $param = [
             'uploaded' => 1,
