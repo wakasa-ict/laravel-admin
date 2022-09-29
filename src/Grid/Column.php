@@ -521,7 +521,7 @@ class Column
                 ($last = array_pop($this->displayCallbacks))
             ) {
                 $last = $this->bindOriginalRowModel($last, $key);
-                $value = call_user_func($last, $previous);
+                $value = call_user_func_array($last, [$previous, $this]);
             }
         }
 
@@ -618,7 +618,7 @@ class Column
     /**
      * Convert characters to HTML entities recursively.
      *
-     * @param array|string $item
+     * @param array|string|null $item
      *
      * @return mixed
      */
@@ -626,10 +626,10 @@ class Column
     {
         if (is_array($item)) {
             array_walk_recursive($item, function (&$value) {
-                $value = htmlentities($value);
+                $value = htmlentities($value ?? '');
             });
         } else {
-            $item = htmlentities($item);
+            $item = htmlentities($item ?? '');
         }
 
         return $item;

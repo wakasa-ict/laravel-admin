@@ -580,7 +580,7 @@ class Grid
     /**
      * Build the grid rows.
      *
-     * @param array $data
+     * @param array      $data
      * @param Collection $collection
      *
      * @return void
@@ -935,7 +935,5 @@ class Grid
         $this->callRenderingCallback();
 
         return Admin::component($this->view, $this->variables());
-
-        return view($this->view, $this->variables());
     }
 }

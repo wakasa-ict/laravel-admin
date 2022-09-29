@@ -101,8 +101,8 @@ class MultipleFile extends Field
         $rules = $input = [];
 
         foreach ($value as $key => $file) {
-            $rules[$this->column . $key] = $this->getRules();
-            $input[$this->column . $key] = $file;
+            $rules[$this->column.$key] = $this->getRules();
+            $input[$this->column.$key] = $file;
         }
 
         return [$rules, $input];
