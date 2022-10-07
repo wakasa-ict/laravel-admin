@@ -405,6 +405,17 @@ return [
     |
     */
     'extensions' => [
+        'ckeditor' => [
 
+            //Set to false if you want to disable this extension
+            'enable' => true,
+
+            // Editor configuration
+            'config' => [
+                'lang'   => 'ja',
+                'height' => 500,
+                'filebrowserImageUploadUrl' => env('APP_URL').'/admin/fileupload', //image upload
+            ],
+        ]
     ],
 ];
