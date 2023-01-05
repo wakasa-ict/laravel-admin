@@ -126,15 +126,15 @@ class ResourceGenerator
                     break;
                 case 'datetime':
                     $fieldType = 'datetime';
-                    $defaultValue = "date('Y-m-d H:i:s')";
+                    $defaultValue = "";
                     break;
                 case 'date':
                     $fieldType = 'date';
-                    $defaultValue = "date('Y-m-d')";
+                    $defaultValue = "";
                     break;
                 case 'time':
                     $fieldType = 'time';
-                    $defaultValue = "date('H:i:s')";
+                    $defaultValue = "";
                     break;
                 case 'text':
                 case 'blob':
