@@ -22,6 +22,12 @@
     <script src="https://oss.maxcdn.com/respond/1.4.2/respond.min.js"></script>
     <![endif]-->
 
+    {{-- app.urlでJavaScriptからLaravelルートURLを取得可能 --}}
+    <script>
+        window.app = {!! json_encode([
+            'url' => url('/'),
+        ]) !!};
+    </script>
 </head>
 
 <body class="hold-transition {{config('admin.skin')}} {{join(' ', config('admin.layout'))}}">

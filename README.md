@@ -31,10 +31,10 @@
     </a>
     <a href="#backers" alt="sponsors on Open Collective">
         <img src="https://opencollective.com/laravel-admin/backers/badge.svg?style=flat-square" />
-    </a> 
+    </a>
     <a href="https://www.paypal.me/zousong" alt="Paypal donate">
         <img src="https://img.shields.io/badge/Donate-Paypal-green.svg?style=flat-square" />
-    </a> 
+    </a>
 </div>
 
 <p align="center">
@@ -55,6 +55,8 @@ php artisan admin:random-password admin,manage,webadmin
 
 調整済み項目
 ------------
+* JSから app.url でルートURLを取得できるよう設定
+  * `console.log(app.url)`
 * Controller生成時に汎用ボタン設定を自動追記
 * HOME画面を目次に変更済み
 * 操作ドロップダウンを操作ボタンに変更済み
@@ -119,9 +121,9 @@ The file `config/admin.php` contains an array of configurations, you can find th
 
 Right to left support
 ------------
-just go to this path `<YOUR_PROJECT_PATH>\vendor\encore\laravel-admin\src\Traits\HasAssets.php` and modify `$baseCss` array for loading right to left (rtl) version of bootstap and AdminLTE css files.    
-**bootstrap.min.css** change it to **bootstrap.rtl.min.css**    
-**AdminLTE.min.css** change it to **AdminLTE.rtl.min.css**  
+just go to this path `<YOUR_PROJECT_PATH>\vendor\encore\laravel-admin\src\Traits\HasAssets.php` and modify `$baseCss` array for loading right to left (rtl) version of bootstap and AdminLTE css files.
+**bootstrap.min.css** change it to **bootstrap.rtl.min.css**
+**AdminLTE.min.css** change it to **AdminLTE.rtl.min.css**
 
 ## Extensions
 
