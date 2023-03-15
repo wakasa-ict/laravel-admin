@@ -27,6 +27,15 @@ class HomeController extends Controller
     public static function addButton($row, $item, $user)
     {
         if($user->visible(\Illuminate\Support\Arr::get($item, 'roles', [])) && $user->can(\Illuminate\Support\Arr::get($item, 'permission'))){
+            if(isset($item['children'])){
+                // 親要素の場合 仕切りとして追加
+                $row->column(12, function (Column $column) use ($item){
+                    $column->append('
+                        <h3><i class="fa '.$item['icon'].' " aria-hidden="true"></i> '.$item['title'].'</h3>
+                    ');
+                });
+            }
+
             if (!isset($item['children']) && $item['uri'] != '/') {
                 // 葉要素の場合 ボタンとして追加
                 $row->column(4, function (Column $column) use ($item) {
