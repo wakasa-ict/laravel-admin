@@ -129,6 +129,14 @@ class AuthController extends Controller
 
         $form = new Form(new $class());
 
+        $form->footer(function ($footer) {
+            $footer->disableViewCheck(); // 詳細表示無効
+            $footer->disableCreatingCheck(); // 続けて作成
+            $footer->disableEditingCheck(); // 編集を続ける無効
+            $footer->disableReset(); // リセット無効
+            // $footer->disableSubmit(); // 送信無効
+        });
+
         $form->display('username', trans('admin.username'));
         $form->text('name', trans('admin.name'))->rules('required');
         $form->password('password', trans('admin.password'))->rules('confirmed|required');
