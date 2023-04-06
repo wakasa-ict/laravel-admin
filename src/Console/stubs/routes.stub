@@ -10,7 +10,7 @@ Route::group([
     'middleware'    => config('admin.route.middleware'),
     'as'            => config('admin.route.prefix') . '.',
 ], function (Router $router) {
-    $router->post('/fileupload', 'FileuploadController@index'); // Add here
+    $router->post('/fileupload', 'FileuploadController@index')->name('fileupload'); // Image Upload API
     $router->get('/', 'HomeController@index')->name('home');
     $router->resource('administrators', AdministratorController::class);
 
