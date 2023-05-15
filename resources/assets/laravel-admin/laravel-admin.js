@@ -196,3 +196,13 @@ $('#totop').on('click', function (e) {
     }
 
 })(jQuery);
+
+$(document).on('pjax:success', function() {
+    $('form').on('submit', function() {
+        $('input[type=file]').each(function() {
+        if ($(this).val() === '') {
+            $(this).remove();
+        }
+        });
+    });
+});
