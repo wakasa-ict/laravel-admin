@@ -160,6 +160,9 @@ return [
             'image' => 'images',
             'file'  => 'files',
         ],
+
+        // Image Quality
+        'quality' => 70,
     ],
 
     /*

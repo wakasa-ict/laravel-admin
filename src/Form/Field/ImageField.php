@@ -50,7 +50,7 @@ trait ImageField
                 call_user_func_array(
                     [$image, $call['method']],
                     $call['arguments']
-                )->save($target);
+                )->save($target, config('admin.upload.quality', 70));
             }
         }
 
