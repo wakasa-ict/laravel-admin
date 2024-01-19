@@ -5,7 +5,7 @@ namespace App\Admin\Controllers;
 use App\Http\Controllers\Controller;
 use Illuminate\Http\Request;
 
-class FileUploadController extends Controller
+class FileuploadController extends Controller
 {
 
     public function index(Request $request)
