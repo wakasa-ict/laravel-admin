@@ -66,7 +66,7 @@ class RandomPasswordCommand extends Command
         $collectionA = array_rand(array_flip(range('a', 'z')), 4);
         $collectionB = array_rand(array_flip(range('A', 'Z')), 4);
         $collectionC = array_rand(array_flip(range(1, 9)), 2);
-        $collectionD = [array_rand(array_flip(['!','$','%','&','(',')','*','+','/']), 2)];
+        $collectionD = array_rand(array_flip(['!','$','%','&','(',')','*','+','/']), 2);
         $passwordstr = array_merge($collectionA,$collectionB,$collectionC,$collectionD);
         return str_shuffle(implode($passwordstr));
     }
